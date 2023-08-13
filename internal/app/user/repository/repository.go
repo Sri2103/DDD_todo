@@ -11,4 +11,5 @@ type UserRepository interface {
 	FindAll()([]*user_model.User,error)
 	Update(user *user_model.User) error
 	Delete(id uuid.UUID) error
+	FindByUserNameAndPassword(userName,password string) (*user_model.User ,error)
 }
