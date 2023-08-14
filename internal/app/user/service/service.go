@@ -7,9 +7,8 @@ import (
 
 type UserService interface {
 	CreateUser(user *user_model.User) error
-	GetUserById(id uuid.UUID)(*user_model.User, error)
-	GetAllUsers()([]*user_model.User, error)
+	GetUserById(id uuid.UUID) (*user_model.User, error)
+	GetAllUsers() ([]*user_model.User, error)
 	UpdateUser(user *user_model.User) error
 	DeleteUser(id uuid.UUID) error
-	
 }
