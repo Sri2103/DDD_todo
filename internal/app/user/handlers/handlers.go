@@ -1,6 +1,7 @@
 package user_handler
 
 import (
+	"encoding/json"
 	"net/http"
 
 	user_model "github.com/sri2103/domain_DD_todo/internal/app/user/model"
@@ -47,4 +48,15 @@ func (h *UserHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {}
 func (h *UserHandler) DeleteUser(w http.ResponseWriter, r *http.Request) {}
 
 // Get all
-func (h *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {}
+func (h *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {
+	usersList, err := h.userService.GetAllUsers()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	jsonData, err := json.MarshalIndent(&usersList, "", " ") // indenting is important here!
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
+}

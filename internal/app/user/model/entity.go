@@ -8,11 +8,11 @@ import (
 )
 
 type User struct {
-	ID       uuid.UUID
-	Name     string
-	UserName string
-	Email    string
-	Password string
+	ID       uuid.UUID `json:"id"`
+	Name     string    `json:"name"`
+	UserName string    `json:"username"`
+	Email    string    `json:"email"`
+	Password string    `json:"password"`
 }
 
 func NewUser() *User {
@@ -24,7 +24,7 @@ func (u *User) ToJSON(r io.Reader) error {
 	return decoder.Decode(u)
 }
 
-func (u *User) fromJson(w io.Writer) error {
+func (u *User) FromJson(w io.Writer) error {
 	encoder := json.NewEncoder(w)
 	return encoder.Encode(u)
 }
