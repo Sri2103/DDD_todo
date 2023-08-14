@@ -13,4 +13,6 @@ func SetUpUserRoutes(userRepo user_repository.UserRepository, r *mux.Router) {
 	handlers := NewUserHandler(userService)
 	r.HandleFunc("/users/create", handlers.CreateUser).Methods(http.MethodPost)
 	r.HandleFunc("/users/all", handlers.GetAllUsers).Methods(http.MethodGet)
+	r.HandleFunc("/users/{id}", handlers.FindById).Methods(http.MethodGet)
+	r.HandleFunc("/users/update",handlers.UpdateUser).Methods(http.MethodPut)
 }
