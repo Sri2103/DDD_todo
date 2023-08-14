@@ -1,9 +1,10 @@
 package db
 
 import (
+	todo_repository "github.com/sri2103/domain_DD_todo/internal/app/todo/repository"
+	user_repository "github.com/sri2103/domain_DD_todo/internal/app/user/repository"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	todo_repository "github.com/sri2103/domain_DD_todo/internal/app/todo/repository"
 )
 
 var db *gorm.DB
@@ -26,5 +27,8 @@ func GetDB() *gorm.DB {
 
 // MigrateModels runs the auto-migration for the models.
 func MigrateModels(db *gorm.DB) error {
-    return db.AutoMigrate(&todo_repository.Pg_Todo{})
+    return db.AutoMigrate(
+		&todo_repository.Pg_Todo{},
+		&user_repository.User_Pg_Todo{},
+	)
 }
