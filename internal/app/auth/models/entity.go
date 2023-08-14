@@ -6,4 +6,5 @@ type Auth_entity struct {
 	ID       uuid.UUID
 	Username string
 	Password string
+	email    string
 }
